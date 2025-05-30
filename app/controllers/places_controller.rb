@@ -8,14 +8,21 @@ class PlacesController < ApplicationController
     @user = User.find_by({ "id" => session["user_id"] })
     if @user != nil    
       @place = Place.find_by({ "id" => params["id"] })
-      @entries = Entry.where({ "place_id" => @place["id"] })
+      @entries = Entry.where({ "place_id" => @place["id"] , "user_id" => @user["id"] })
     else
-      flash["notice"] = "Login to see places and journal entries."
+      flash["notice"] = "Please login to see your places and journal entries."
+      redirect_to "/login"
     end
   end
 
   def new
     @user = User.find_by({ "id" => session["user_id"] })
+    if @user != nil    
+      @place = Place.new
+    else
+      flash["notice"] = "Please login to see your places and journal entries."
+      redirect_to "/login"
+    end
   end
 
   def create
