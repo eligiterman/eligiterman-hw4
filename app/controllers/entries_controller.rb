@@ -1,6 +1,13 @@
 class EntriesController < ApplicationController
 
   def new
+    @user = User.find_by({ "id" => session["user_id"] })
+    if @user != nil
+      @entry = Entry.new
+    else
+      flash["notice"] = "You must log in to add a journal entry."
+      redirect_to "/login"
+    end
   end
 
   def create
