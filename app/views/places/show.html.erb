@@ -1,13 +1,18 @@
-<h1><%= @place["name"] %></h1>
+<h1 class="mb-3"><%= @place["name"] %></h1>
 
-<h2>My Entries</h2>
-<% for entry in @entries %>
-  <h3><%= entry["title"] %></h3>
-  <h4><%= entry["occurred_on"] %></h4>
-  <p><%= entry["description"] %></p>
-<% end %>
+<h2 class="mb-4">My Entries</h2>
+<div class="row g-3 mb-4">
+  <% for entry in @entries %>
+    <div class="col-12 col-md-4 g-3">
+      <h3 class="mb-2"><%= entry["title"] %></h3>
+      <p>Occurred on: <%= entry["occurred_on"] %></p>
+      <img src="<%= entry["image"] %>" class="img-fluid mb-2" alt="Entry image">
+      <p><%= entry["description"] %></p>
+    </div>
+  <% end %>
+</div>
 
-<p>
+<p class="mt-4 mb-2">
   <a class="btn btn-primary" href="/entries/new?place_id=<%= @place["id"] %>" role="button">New Entry</a>
 </p>
 
