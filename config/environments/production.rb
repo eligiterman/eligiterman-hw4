@@ -66,4 +66,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Indicate that we are using the :local storage option in development
+  config.active_storage.service = :local
+
 end

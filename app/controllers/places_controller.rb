@@ -10,7 +10,7 @@ class PlacesController < ApplicationController
       @place = Place.find_by({ "id" => params["id"] })
       @entries = Entry.where({ "place_id" => @place["id"] , "user_id" => @user["id"] })
     else
-      flash["notice"] = "Please login to see your places and journal entries."
+      flash["notice"] = "Please login to see your journal entries."
       redirect_to "/login"
     end
   end
@@ -20,7 +20,7 @@ class PlacesController < ApplicationController
     if @user != nil    
       @place = Place.new
     else
-      flash["notice"] = "Please login to see your places and journal entries."
+      flash["notice"] = "Please login first."
       redirect_to "/login"
     end
   end
@@ -32,7 +32,7 @@ class PlacesController < ApplicationController
       @place["name"] = params["name"]
       @place.save
     else
-      flash["notice"] = "Must login first."
+      flash["notice"] = "Please login first."
     end
     redirect_to "/places"
   end
